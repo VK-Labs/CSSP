@@ -45,7 +45,15 @@ class TeamsController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        if ($request->has('name')) {
+            $team = new Team;
+
+            $team->name = $request->name;
+            $team->password = $request->password;
+            $team->save();
+        }
+
+        return dd($request->input('name'));
     }
 
     /**
