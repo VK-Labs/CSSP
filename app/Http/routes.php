@@ -24,3 +24,4 @@ Route::resource('sports', 'SportsController');
 Route::get('teams/join', 'TeamsController@join');
 Route::resource('teams', 'TeamsController');
 Route::resource('scores', 'ScoresController');
+Route::resource('match', 'MatchController');

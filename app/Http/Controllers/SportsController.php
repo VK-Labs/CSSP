@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Sport;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 
 class SportsController extends Controller
 {
@@ -16,7 +18,9 @@ class SportsController extends Controller
      */
     public function index()
     {
-        //
+        $sports = Sport::all();
+
+        return view('sports.index', compact('sports'));
     }
 
     /**
@@ -37,7 +41,17 @@ class SportsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->has('name')) {
+            $sport = new Sport;
+
+            $sport->name = $request->name;
+//            $sport->minPlayer = $request->min;
+//            $sport->maxPlayer = $request->max;
+//            $sport->rounds = $request->rounds;
+            $sport->save();
+        }
+
+        return Redirect::route('sports.index');
     }
 
     /**
@@ -48,7 +62,9 @@ class SportsController extends Controller
      */
     public function show($id)
     {
-        //
+        $sport = Sport::findOrFail($id);
+
+        return view('sports.show', compact('sport'));
     }
 
     /**

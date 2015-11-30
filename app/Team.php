@@ -8,5 +8,5 @@ class Team extends Model
 {
     protected $table = 'teams';
 
-    protected $fillable = ['name', 'password'];
+    protected $fillable = ['name', 'sportID'];
 }

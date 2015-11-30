@@ -15,6 +15,9 @@ class CreateSportsTable extends Migration
         Schema::create('sports', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
+//            $table->integer('minPlayer');
+//            $table->integer('maxPlayer');
+//            $table->integer('rounds');
             $table->timestamps();
         });
     }

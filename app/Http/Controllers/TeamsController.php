@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use App\Sport;
 use Illuminate\Http\Request;
 
 use App\Team;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 
 class TeamsController extends Controller
 {
@@ -18,8 +21,9 @@ class TeamsController extends Controller
     public function index()
     {
         $teams = Team::all();
+        $sport = Sport::lists('name', 'id');
 
-        return view('teams.index', compact('teams'));
+        return view('teams.index', compact('teams', 'sport'));
     }
 
     public function join()
@@ -34,7 +38,10 @@ class TeamsController extends Controller
      */
     public function create()
     {
-        return view('teams.create');
+        $sports = Sport::lists('name', 'id');
+        //$sports = DB::table('sports')->lists('name', 'id');
+
+        return view('teams.create')->with('sport', $sports);
     }
 
     /**
@@ -45,15 +52,17 @@ class TeamsController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->has('name')) {
-            $team = new Team;
 
-            $team->name = $request->name;
-            $team->password = $request->password;
-            $team->save();
+        for ($i=0; $i < count($request->TeamName); $i++)  {
+            $data[] = array(
+                'name' => $request->TeamName[$i],
+                'sportID' => $request->sport
+            );
         }
 
-        return dd($request->input('name'));
+        DB::table('teams')->insert($data);
+
+        return Redirect::route('teams.index');
     }
 
     /**
@@ -64,7 +73,9 @@ class TeamsController extends Controller
      */
     public function show($id)
     {
-        //
+        $team = Team::findOrFail($id);
+
+        return view('teams.show', compact('team'));
     }
 
     /**

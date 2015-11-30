@@ -18,6 +18,11 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- JQuery -->
+    <script src="/js/jquery-1.11.3.min.js"></script>
+    {{--<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>--}}
+
 </head>
 <body>
 
@@ -38,13 +43,13 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Players<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ url('/players') }}">List</a></li>
-                        <li><a href="{{ url('/players/create') }}">Create</a></li>
-                    </ul>
-                </li>
+                {{--<li class="dropdown">--}}
+                    {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Players<span class="caret"></span></a>--}}
+                    {{--<ul class="dropdown-menu">--}}
+                        {{--<li><a href="{{ url('/players') }}">List</a></li>--}}
+                        {{--<li><a href="{{ url('/players/create') }}">Create</a></li>--}}
+                    {{--</ul>--}}
+                {{--</li>--}}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Teams<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -59,7 +64,13 @@
                         <li><a href="{{ url('/sports/create') }}">Create</a></li>
                     </ul>
                 </li>
-                <li><a href="{{ url('/scores') }}">Scores</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Others<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ url('/scores') }}">Scores</a></li>
+                        <li><a href="{{ url('/match') }}">Matchups</a></li>
+                    </ul>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::guest())

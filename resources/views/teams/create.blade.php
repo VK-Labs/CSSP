@@ -2,6 +2,21 @@
 @extends('app')
 
 @section('content')
+    <script>
+        $(document).ready(function(){
+            var source = $(".teamname");
+
+            $("#number").change(function(){
+                for (var i=0; i < $("#number").val() - 1; i++){
+                    $(".moreForms").append(source.clone());
+                }
+                $(".num").hide();
+            });
+
+
+        });
+    </script>
+
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
@@ -23,18 +38,44 @@
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/teams') }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Team Name</label>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                            <div class="form-group num">
+                                {!! Form::label('number', 'Number of Teams:', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-2">
+                                    {!! Form::text('number', null, ['class' => 'form-control', 'id' => 'number']) !!}
+                                </div>
+
+                                {!! Form::label('Sport', 'Sport Type:', ['class' => 'col-md-2 control-label']) !!}
+                                <div class="col-md-4">
+                                    {!! Form::select('sport', $sport, null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
 
-                            <!-- Team Password Form Input -->
-                            <div class="form-group">
-                                {!! Form::label('Team Password', 'Team Password:', ['class' => 'col-md-4 control-label']) !!}
-                                <div class="col-md-6">{!! Form::password('Team Password', ['class' => 'form-control']) !!}</div>
+                            <hr>
+
+                            <div class="form-group teamname">
+                                {{--<div class="teamname"></div>--}}
+                                {!! Form::label('TeamName', 'Team Name:', ['class' => 'col-md-4 control-label']) !!}
+                                <div class="col-md-6">
+                                    {!! Form::text('TeamName[]', null, ['class' => 'form-control']) !!}
+                                </div>
                             </div>
+
+                            <div class="moreForms"></div>
+
+                            {{--<div class="form-group">--}}
+                                {{--{!! Form::label('Sport', 'Sport Type:', ['class' => 'col-md-4 control-label']) !!}--}}
+                                {{--<div class="col-md-6">--}}
+                                    {{--{!! Form::select('sport', $sport, null, array('class' => 'form-control')) !!}--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+
+                            {{--<!-- Team Password Form Input -->--}}
+                            {{--<div class="form-group">--}}
+                                {{--{!! Form::label('TeamPassword', 'Team Password:', ['class' => 'col-md-4 control-label']) !!}--}}
+                                {{--<div class="col-md-6">--}}
+                                    {{--{!! Form::password('TeamPassword', ['class' => 'form-control']) !!}--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
@@ -42,6 +83,7 @@
                                         Register
                                     </button>
                                 </div>
+                            </div>
                             </div>
                         </form>
                     </div>

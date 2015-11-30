@@ -15,7 +15,9 @@ class CreateTeamsTable extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->string('password', 60);
+//            $table->string('password', 60);
+            $table->integer('sportID')->unsigned();
+            $table->foreign('sportID')->references('id')->on('sports')->onDelete('cascade');
             $table->timestamps();
         });
     }
